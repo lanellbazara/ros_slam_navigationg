@@ -1,0 +1,16 @@
+# ROS build artifacts
+build/
+devel/
+install/
+logs/
+.catkin_workspace
+
+# Ignore the workspace toplevel CMakeLists.txt (symbolic link)
+/src/CMakeLists.txt
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
