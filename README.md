@@ -22,11 +22,11 @@
 ## 环境依赖
 - ROS Noetic（建议 Ubuntu 20.04）
 - Gazebo（随 ROS 安装）
-- teleop_twist_keyboard；未安装可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 安装
+- teleop_twist_keyboard（如未安装，可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 安装）
 - rosdep 可用，用于自动安装依赖
 
 ## 安装与编译
-假设工作空间目录名为 `test_ws`，即本仓库根目录：
+假设工作空间目录名为 `test_ws`，即本仓库根目录（若目录名称不同，请在下方命令中替换为实际路径）：
 1. 安装依赖
    ```bash
    cd test_ws
