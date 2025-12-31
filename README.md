@@ -20,40 +20,38 @@
 ```
 
 ## 环境依赖
-- ROS Noetic（建议 Ubuntu 20.04）
-- Gazebo（随 ROS 安装）
-- teleop_twist_keyboard（如未安装，可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 安装）
-- rosdep 可用，用于自动安装依赖
+- ROS Noetic（建议 Ubuntu 20.04，默认包含 Gazebo）
+- rosdep（用于自动安装依赖）
+- teleop_twist_keyboard（键盘控制，未安装可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 安装）
 
 ## 安装与编译
-假设工作空间目录名为 `test_ws`，即本仓库根目录（若目录名称不同，请在下方命令中替换为实际路径）：
+下文使用 `<workspace_root>` 代表工作空间根目录（例如本仓库根目录 `test_ws`，若名称不同请自行替换）：
 1. 安装依赖
    ```bash
-   cd test_ws
+   cd <workspace_root>
    rosdep install --from-paths src --ignore-src -r -y
    ```
 2. 编译工作空间并加载环境
    ```bash
+   cd <workspace_root>
    catkin_make
    source devel/setup.bash
    ```
+   后续所有终端请先进入 `<workspace_root>` 并执行一次 `source devel/setup.bash`（可选：写入 `~/.bashrc`），下文命令不再重复。
 
 ## 复现步骤（中文）
 
 ### 1. 建图（Karto SLAM）
 1. 终端 A：启动仿真与 SLAM
    ```bash
-   cd test_ws && source devel/setup.bash
    roslaunch model_test karto_mapping.launch
    ```
 2. 终端 B：键盘控制机器人运动
    ```bash
-   cd test_ws && source devel/setup.bash
    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
    ```
 3. 终端 C：完成探索后保存地图，会生成 map.pgm/map.yaml
    ```bash
-   cd test_ws && source devel/setup.bash
    rosrun map_server map_saver -f $(rospack find model_test)/maps/simple/map
    ```
    生成的文件位于 `$(rospack find model_test)/maps/simple/`，包含 `map.pgm` 与 `map.yaml`。
@@ -66,17 +64,14 @@
    如需使用其他地图，可通过参数 `map_file:=<路径>` 指定。
 2. 终端 A：启动导航，默认加载 simple.world 和保存的地图
    ```bash
-   cd test_ws && source devel/setup.bash
    roslaunch model_test navigation.launch map_file:=$(rospack find model_test)/maps/simple/map.yaml
    ```
 3. 终端 B：运行示例导航客户端，发送预设巡逻点
    ```bash
-   cd test_ws && source devel/setup.bash
    rosrun model_test navigation_client.py
    ```
 
 ### 3. 系统监控
 ```bash
-cd test_ws
 ./monitor_robot.sh
 ```
