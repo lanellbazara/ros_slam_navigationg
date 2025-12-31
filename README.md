@@ -57,11 +57,11 @@
    ```
 
 ### 2. 导航复现（AMCL + MoveBase）
-1. 确认 `maps/simple/map.yaml` 为刚才保存的地图；如需使用其他地图，可通过参数 `map_file:=<路径>` 指定。
+1. 确认刚才保存的地图文件对（`map.pgm` 与 `map.yaml`）位于 `$(rospack find model_test)/maps/simple/`，如需使用其他地图，可通过参数 `map_file:=<路径>` 指定。
 2. 终端 A：启动导航（默认加载 simple.world 和保存的地图）
    ```bash
    cd test_ws && source devel/setup.bash
-   roslaunch model_test navigation.launch map_file:=$(find model_test)/maps/simple/map.yaml
+   roslaunch model_test navigation.launch map_file:=$(rospack find model_test)/maps/simple/map.yaml
    ```
 3. 终端 B：运行示例导航客户端（发送预设巡逻点）
    ```bash
