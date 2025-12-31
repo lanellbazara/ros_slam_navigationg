@@ -22,7 +22,7 @@
 ## 环境依赖
 - ROS Noetic（建议 Ubuntu 20.04）
 - Gazebo（随 ROS 安装）
-- teleop_twist_keyboard（未安装可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 获取）
+- teleop_twist_keyboard（未安装可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 安装）
 - rosdep 可用，用于自动安装依赖
 
 ## 安装与编译
@@ -59,7 +59,7 @@
    生成的文件位于 `$(rospack find model_test)/maps/simple/`，包含 `map.pgm` 与 `map.yaml`。
 
 ### 2. 导航复现（AMCL + MoveBase）
-1. 确认刚才保存的地图文件对（`map.pgm` 与 `map.yaml`）位于 `$(rospack find model_test)/maps/simple/`，可用以下命令验证：
+1. 确保地图文件对（`map.pgm` 与 `map.yaml`）已放在 `$(rospack find model_test)/maps/simple/`，可用以下命令验证：
    ```bash
    ls $(rospack find model_test)/maps/simple/map.*
    ```
