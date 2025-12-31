@@ -59,7 +59,7 @@
    生成的文件位于 `$(rospack find model_test)/maps/simple/`，包含 `map.pgm` 与 `map.yaml`。
 
 ### 2. 导航复现（AMCL + MoveBase）
-1. 确保地图文件对 `map.pgm` 与 `map.yaml` 已放在 `$(rospack find model_test)/maps/simple/`，可用以下命令验证：
+1. 确保地图文件 `map.pgm` 与 `map.yaml` 已放在 `$(rospack find model_test)/maps/simple/`，可用以下命令验证：
    ```bash
    ls $(rospack find model_test)/maps/simple/map.*
    ```
