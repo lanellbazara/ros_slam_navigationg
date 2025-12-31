@@ -22,6 +22,7 @@
 ## 环境依赖
 - ROS Noetic（建议 Ubuntu 20.04）
 - Gazebo（随 ROS 安装）
+- teleop_twist_keyboard（未安装可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 获取）
 - rosdep 可用，用于自动安装依赖
 
 ## 安装与编译
@@ -45,7 +46,7 @@
    cd test_ws && source devel/setup.bash
    roslaunch model_test karto_mapping.launch
    ```
-2. 终端 B：键盘控制机器人运动（未安装可先 `sudo apt install ros-noetic-teleop-twist-keyboard`）
+2. 终端 B：键盘控制机器人运动
    ```bash
    cd test_ws && source devel/setup.bash
    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
@@ -55,9 +56,14 @@
    cd test_ws && source devel/setup.bash
    rosrun map_server map_saver -f $(rospack find model_test)/maps/simple/map
    ```
+   生成的文件位于 `$(rospack find model_test)/maps/simple/`，包含 `map.pgm` 与 `map.yaml`。
 
 ### 2. 导航复现（AMCL + MoveBase）
-1. 确认刚才保存的地图文件对（`map.pgm` 与 `map.yaml`）位于 `$(rospack find model_test)/maps/simple/`，如需使用其他地图，可通过参数 `map_file:=<路径>` 指定。
+1. 确认刚才保存的地图文件对（`map.pgm` 与 `map.yaml`）位于 `$(rospack find model_test)/maps/simple/`，可用以下命令验证：
+   ```bash
+   ls $(rospack find model_test)/maps/simple/map.*
+   ```
+   如需使用其他地图，可通过参数 `map_file:=<路径>` 指定。
 2. 终端 A：启动导航（默认加载 simple.world 和保存的地图）
    ```bash
    cd test_ws && source devel/setup.bash
