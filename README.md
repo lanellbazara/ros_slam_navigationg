@@ -25,7 +25,7 @@
 - teleop_twist_keyboard（键盘控制，未安装可通过 `sudo apt install ros-noetic-teleop-twist-keyboard` 安装）
 
 ## 安装与编译
-下文使用 `<workspace_root>` 代表工作空间根目录（例如本仓库根目录 `test_ws`，若名称不同请自行替换）：
+下文使用 `<workspace_root>` 代表工作空间根目录（即当前仓库根目录，可根据实际名称替换）：
 1. 安装依赖
    ```bash
    cd <workspace_root>
@@ -40,6 +40,7 @@
    后续所有终端请先进入 `<workspace_root>` 并执行一次 `source devel/setup.bash`（可选：写入 `~/.bashrc`），下文命令不再重复。
 
 ## 复现步骤（中文）
+以下命令均假设终端已经切换到 `<workspace_root>` 并执行过 `source devel/setup.bash`。
 
 ### 1. 建图（Karto SLAM）
 1. 终端 A：启动仿真与 SLAM
