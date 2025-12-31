@@ -1,0 +1,7 @@
+image: /home/xlf/test_ws/src/model_test/maps/simple/map.pgm
+resolution: 0.020000
+origin: [-2.409604, -2.410119, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

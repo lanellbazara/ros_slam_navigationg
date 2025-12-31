@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Export the package path so Gazebo can find the media folder -->
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find model_test):$(optenv GAZEBO_RESOURCE_PATH)" />
+
+  <!-- 设置世界文件路径 -->
+  <arg name="world_name" default="$(find model_test)/worlds/simple.world"/>
+  <arg name="x_pos" default="1"/>
+  <arg name="y_pos" default="1.75"/>
+  <arg name="z_pos" default="0"/>
+
+  <!-- 启动 Gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- 加载机器人描述参数 (GPU Version) -->
+  <param name="robot_description" textfile="$(find model_test)/urdf/sensors_robot.urdf"/>
+
+  <!-- 运行 robot_state_publisher 节点，发布 TF -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+  </node>
+
+  <!-- 在 Gazebo 中生成机器人模型 -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model btr_80 -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+  <!-- 启动rviz并强制使用cpu渲染 -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find model_test)/rviz/slam.rviz" required="false">
+    <env name="LIBGL_ALWAYS_SOFTWARE" value="1"/>
+  </node>
+
+  <!-- Karto SLAM -->
+  <node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
+    <remap from="scan" to="/scan"/>
+    <param name="odom_frame" value="odom"/>
+    <param name="base_frame" value="base_footprint"/>
+    <param name="map_update_interval" value="1"/>
+    <param name="resolution" value="0.02"/>
+    <param name="delta" value="0.02"/>
+  </node>
+
+</launch>

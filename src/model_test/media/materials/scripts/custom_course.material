@@ -1,0 +1,14 @@
+material Custom/SandRocks
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture coast_sand_rocks.jpg
+        scale 0.1 0.1
+      }
+    }
+  }
+}

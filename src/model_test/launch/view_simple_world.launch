@@ -1,0 +1,17 @@
+<launch>
+  <!-- Fix for WSL2 rendering if needed -->
+  <env name="LIBGL_ALWAYS_SOFTWARE" value="1"/>
+  
+  <!-- Export the package path so Gazebo can find the media folder -->
+  <!-- We point to the package root, so file://media/... works -->
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find model_test):$(optenv GAZEBO_RESOURCE_PATH)" />
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find model_test)/worlds/simple.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+</launch>

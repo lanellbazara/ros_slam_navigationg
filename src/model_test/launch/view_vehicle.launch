@@ -1,0 +1,15 @@
+<launch>
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" textfile="$(find model_test)/urdf/vehicle.urdf"/>
+
+  <!-- Send fake joint values -->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+
+  <!-- Combine joint values -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- Show in Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find model_test)/rviz/vehicle.rviz" required="true">
+    <env name="LIBGL_ALWAYS_SOFTWARE" value="1"/>
+  </node>
+</launch>
